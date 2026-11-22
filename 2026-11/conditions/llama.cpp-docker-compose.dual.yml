@@ -1,0 +1,24 @@
+# 2枚構成 (RTX 5070Ti + RTX 5060Ti) 用の上書き定義
+# .env の COMPOSE_FILE でこのファイルを追加すると有効になる
+services:
+  llama-server:
+    environment:
+      CUDA_VISIBLE_DEVICES: ${GPU_MAIN:-0},${GPU_SUB:-1}
+      # 複数GPUへの分割方式 (layer / row / tensor)
+      #   layer : 層ごとに分割しパイプライン実行 (安定・既定)
+      #   tensor: 重みとKVを2枚で並列計算 (実験的。PCIe帯域次第で高速化)
+      LLAMA_ARG_SPLIT_MODE: ${SPLIT_MODE:-layer}
+      # 分割比率 (並び順は GPU_MAIN,GPU_SUB)
+      LLAMA_ARG_TENSOR_SPLIT: ${TENSOR_SPLIT:-1,1}
+      # 中間結果を置くGPU (row/tensor時)。高速な5070Ti を使う
+      # ※ ここはコンテナ内の番号 = CUDA_VISIBLE_DEVICES の並び順 (GPU_MAIN,GPU_SUB)
+      #   0 = GPU_MAIN (5070Ti)。ホストの nvidia-smi 番号ではないので 1 にしないこと
+      LLAMA_ARG_MAIN_GPU: 0
+      # --fit が各GPUに残す空きVRAM (MiB, GPU_MAIN,GPU_SUB の順)
+      # ※ --fit は tensor 分割に未対応 (無視される) ので tensor 時は N_GPU_LAYERS=all
+      LLAMA_ARG_FIT_TARGET: ${FIT_TARGET:-1024,512}
+      LLAMA_ARG_N_GPU_LAYERS: ${N_GPU_LAYERS:-auto}
+      # tensor 分割時のGPU間通信方式 (nccl / internal / butterfly)
+      #   nccl は WSL(Docker Desktop) では P2P が無く 'invalid argument' で落ちる
+      #   internal が最速 (実測)。layer 分割では使われない
+      GGML_CUDA_ALLREDUCE: ${ALLREDUCE:-internal}

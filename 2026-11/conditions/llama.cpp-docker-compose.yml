@@ -1,0 +1,49 @@
+services:
+  llama-server:
+    # CPU版: ghcr.io/ggml-org/llama.cpp:server
+    # NVIDIA GPU版: ghcr.io/ggml-org/llama.cpp:server-cuda
+    image: ${LLAMA_IMAGE:-ghcr.io/ggml-org/llama.cpp:server-cuda}
+    container_name: llama-server
+    restart: no
+    ports:
+      - "${LLAMA_PORT:-8080}:8080"
+    volumes:
+#      - ./model./models
+#      - ./models:/models
+      - ./models:/models
+    environment:
+      # GPU番号を nvidia-smi と同じ PCIバス順に揃える
+      CUDA_DEVICE_ORDER: PCI_BUS_ID
+      # 使用するGPU (シングル: RTX 5070Ti のみ / 2枚構成は docker-compose.dual.yml で上書き)
+      CUDA_VISIBLE_DEVICES: ${GPU_MAIN:-0}
+#      LLAMA_ARG_MODEL: /models/${MODEL_FILE}
+      LLAMA_ARG_MODELS_PRESET: /models/models.ini
+      LLAMA_ARG_MODELS_MAX: 1      
+      LLAMA_ARG_HOST: 0.0.0.0
+      LLAMA_ARG_PORT: 8080
+      LLAMA_ARG_CTX_SIZE: ${CTX_SIZE:-8192}
+#      LLAMA_ARG_N_GPU_LAYERS: ${N_GPU_LAYERS:-99}
+      LLAMA_ARG_N_PARALLEL: ${N_PARALLEL:-1}
+      LLAMA_ARG_FLASH_ATTN: ${FLASH_ATTN:-on}
+      # KVキャッシュの量子化 (VRAM節約)
+      LLAMA_ARG_CACHE_TYPE_K: ${CACHE_TYPE_K:-f16}
+      LLAMA_ARG_CACHE_TYPE_V: ${CACHE_TYPE_V:-f16}
+      LLAMA_ARG_JINJA: 1
+      # 投機的デコード (none / draft-mtp 等)。draft-mtp はモデル内蔵のMTPヘッドを使う
+      LLAMA_ARG_SPEC_TYPE: ${SPEC_TYPE:-none}
+      LLAMA_API_KEY: ${API_KEY:-}
+      LLAMA_ARG_MMPROJ: ${MMPROJ_FILE}
+    # CPU版を使う場合は deploy セクションを削除またはコメントアウト
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s

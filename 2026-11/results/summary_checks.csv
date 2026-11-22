@@ -1,0 +1,15 @@
+engine,model,n,chars,num_derived,num_ungrounded,head_missing,head_decorated,head_extra,own_tables,broken_tables,advice,causal,negative_cond,instruction_copy,leak,simplified_zh,english_runs,summary_missing,sections_over3_numbers,unseen_weather_group,headline_table_verbatim
+forecast,gemma-4-12b-it-qat,6,834,19,0,0,0,7,10,0,7,0,0,0,0,0,0,,,,
+forecast,gemma-4-31b-it-qat,6,634,11,0,0,0,6,10,0,4,0,0,0,0,0,0,,,,
+forecast,qwen3.8-27b-ud-q4_k_m,6,1516,39,4,0,0,13,16,0,19,3,0,0,0,0,0,,,,
+forecast,llm-jp-4.1-33b-thinking,6,673,33,21,0,0,15,23,0,14,0,0,0,0,0,0,,,,
+forecast,qwen3.8-flash-next-iq3_s,6,1432,45,13,0,0,8,16,0,20,0,0,0,0,0,0,,,,
+forecast,qwen3.8-flash-next-unsloth-ud-q4_k_xl,6,1348,48,5,0,0,7,12,0,19,0,0,0,0,0,0,,,,
+staged,gemma-4-12b-it-qat,9,1072,0,0,0,0,1,0,0,2,9,0,0,0,0,0,0,13,0,9
+staged,gemma-4-31b-it-qat,9,706,0,0,0,0,0,0,0,0,3,0,0,0,0,0,2,15,0,9
+staged,qwen3.8-27b-ud-q4_k_m,9,792,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,9
+staged,llm-jp-4.1-33b-thinking,9,861,24,2,0,0,0,0,0,0,5,0,0,0,0,0,0,27,0,9
+staged,qwen3.8-flash-next-iq3_s,9,798,1,0,0,5,0,0,0,1,1,0,5,0,0,0,0,0,0,9
+staged,qwen3.8-flash-next-unsloth-ud-q4_k_xl,9,981,2,0,0,0,0,0,0,2,4,0,0,0,0,0,0,23,0,9
+staged,qwen3.8-flash-next-iq3_s [thinking OFF],9,855,1,0,1,0,0,1,0,0,5,0,0,0,0,0,0,21,0,8
+single,gemma-4-12b-it-qat,6,310,11,0,0,0,3,19,0,0,0,0,0,0,0,0,,,,

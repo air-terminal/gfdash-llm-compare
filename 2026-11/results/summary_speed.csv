@@ -1,0 +1,15 @@
+kind,model,server,n,median,min,max
+forecast,gemma-4-12b-it-qat,llama.cpp,6,16,14,17
+forecast,gemma-4-31b-it-qat,llama.cpp,6,20,18,22
+forecast,qwen3.8-27b-ud-q4_k_m,llama.cpp,6,22,19,26
+forecast,llm-jp-4.1-33b-thinking,llama.cpp,6,44,38,51
+forecast,qwen3.8-flash-next-iq3_s,Strata,6,21,17,23
+forecast,qwen3.8-flash-next-unsloth-ud-q4_k_xl,Strata,6,22,17,25
+review staged,gemma-4-12b-it-qat,llama.cpp,9,179,81,207
+review staged,gemma-4-31b-it-qat,llama.cpp,9,121,88,179
+review staged,qwen3.8-27b-ud-q4_k_m,llama.cpp,9,321,223,434
+review staged,llm-jp-4.1-33b-thinking,llama.cpp,9,188,167,272
+review staged,qwen3.8-flash-next-iq3_s,Strata,9,347,239,436
+review staged,qwen3.8-flash-next-unsloth-ud-q4_k_xl,Strata,9,30,24,36
+review staged,qwen3.8-flash-next-iq3_s [thinking OFF],Strata,9,23,18,29
+review single,gemma-4-12b-it-qat,llama.cpp,6,32,29,39
