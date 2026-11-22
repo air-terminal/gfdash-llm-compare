@@ -13,9 +13,10 @@ W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 最後の2つは追加の測定（thinking OFF）。IQ3_S の thinking OFF はモデル名が同じなので、段階（phase）で分けて名前に印を付ける
 IQ_OFF = 'qwen3.8-flash-next-iq3_s [thinking OFF]'
 ORDER = ['gemma-4-12b-it-qat', 'gemma-4-31b-it-qat', 'qwen3.8-27b-ud-q4_k_m', 'llm-jp-4.1-33b-thinking', 'qwen3.8-flash-next-iq3_s',
-         'qwen3.8-flash-next-unsloth-ud-q4_k_xl', IQ_OFF]
-SERVER = {m: 'llama.cpp' for m in ORDER[:4]}
-for m in ORDER[4:]:
+         'qwen3.8-flash-next-unsloth-ud-q4_k_xl', IQ_OFF,
+         'gpt-oss-20b-mxfp4', 'gemma-4-26b-a4b-it-qat', 'qwen3.6-27b-q4_k_m']   # 最後の3つは追加の3モデル
+SERVER = {m: 'llama.cpp' for m in ORDER[:4] + ORDER[7:]}
+for m in ORDER[4:7]:
     SERVER[m] = 'Strata'
 
 
@@ -24,6 +25,9 @@ def label(model, phase):
 
 
 times = list(csv.DictReader(open(f'{W}/data/times.tsv', encoding='utf-8'), delimiter='\t'))
+# 実行されなかった行（rc が 0 以外。2026-11-22 にホストの docker が起動できなかった1件）は数えない。
+# その行の run_id は直前の実行のものなので、run_id の対応からも外す
+times = [t for t in times if t['rc'] == '0']
 phase_of = {int(t['run_id']): t['phase'] for t in times if t['run_id'] not in ('', '-')}
 speed = defaultdict(list)
 warm = defaultdict(list)

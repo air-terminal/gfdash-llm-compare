@@ -8,7 +8,7 @@
  "target_month": "2026-04",
  "model": "llm-jp-4.1-33b-thinking",
  "server": "llama.cpp",
- "thinking": "ON（まとめの段のみ）",
+ "thinking": "止められない（常に思考する）",
  "sampling": "temperature 0.8 / top_p 0.95 / top_k 40 / min_p 0.05（llama.cpp の既定）",
  "seconds": 206.7,
  "started": "2026-11-22 07:25:45",

@@ -5,7 +5,7 @@
 
 | 回 | 内容 | モデル |
 |---|---|---|
-| [2026-11](2026-11/) | 見通し・営業レビュー（多段／1回）。計105件。thinking OFF の追加の測定あり | gemma-4 12B / 31B（QAT）、Qwen3.8 27B、llm-jp-4.1 33B thinking（llama.cpp）、Qwen3.8-Flash-Next IQ3_S / Q4_K_XL（Strata） |
+| [2026-11](2026-11/) | 見通し・営業レビュー（多段／1回）。計150件。thinking OFF の追加の測定、所見の解析の比較あり | gemma-4 12B / 26B-A4B / 31B（QAT）、Qwen3.6 27B、Qwen3.8 27B、llm-jp-4.1 33B thinking、gpt-oss-20b（llama.cpp）、Qwen3.8-Flash-Next IQ3_S / Q4_K_XL（Strata） |
 
 各回のフォルダに、条件・結果の文書（README）、1件ずつの記録、プロンプトの全文、検査のスクリプトがあります。
 

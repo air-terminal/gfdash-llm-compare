@@ -1,0 +1,10 @@
+model,sample_ok,demo_period_ok,demo_factor_given,demo_direction_ok,grounding_notes,failed,median_seconds,load_seconds
+gemma-4-12b-it-qat,5/5,9/9,1,1,0,0,3.2,43.0
+gemma-4-31b-it-qat,5/5,8/9,1,1,0,0,5.5,100.0
+qwen3.8-27b-ud-q4_k_m,5/5,7/9,2,2,0,0,3.0,94.4
+llm-jp-4.1-33b-thinking,5/5,2/9,1,1,0,0,20.4,107.1
+qwen3.8-flash-next-iq3_s,5/5,9/9,3,3,2,0,2.9,
+qwen3.8-flash-next-unsloth-ud-q4_k_xl,5/5,9/9,3,3,1,0,4.2,
+gpt-oss-20b-mxfp4,5/5,1/9,1,1,0,0,8.6,45.7
+gemma-4-26b-a4b-it-qat,5/5,9/9,3,2,3,0,1.7,56.4
+qwen3.6-27b-q4_k_m,5/5,9/9,9,9,9,0,5.1,62.6
